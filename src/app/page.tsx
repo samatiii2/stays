@@ -151,14 +151,13 @@ const DEMO_CATS_2: TaxonomyType[] = [
 function PageHome() {
   const { data: session,status } = useSession();
 
- //TODO how to manage session in app after authetication AND page acces with nextAuth
   useEffect(() => {
+    if (status === "authenticated") {
+      console.log("User is authenticated:", session);
+    }
     if (status === "unauthenticated") {
       // Redirect to login page if user is not authenticated
       redirect("/login");
-    }
-    if (status === "authenticated") {
-      console.log("User is authenticated:", session);
     }
   }, [status,session]);
 

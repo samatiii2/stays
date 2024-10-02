@@ -8,6 +8,8 @@ import clientPromise from "@/lib/MongodbClient";
 export const authOptions: NextAuthOptions = {
   session: {
     strategy: "jwt",
+    maxAge: 60 * 60 * 24 * 7, // 7 days (in seconds)
+    updateAge: 24 * 60 * 60, // Session is refreshed every 24 hours
   },
   providers: [
     GithubProvider({
