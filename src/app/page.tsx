@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, {useEffect} from "react";
 import SectionHero from "@/app/(server-components)/SectionHero";
 import {TaxonomyType} from "@/data/types";
 import SectionSliderNewCategories from "@/components/SectionSliderNewCategories";
@@ -149,12 +149,18 @@ const DEMO_CATS_2: TaxonomyType[] = [
 ];
 
 function PageHome() {
-  const { data: session } = useSession();
+  const { data: session,status } = useSession();
 
  //TODO how to manage session in app after authetication AND page acces with nextAuth
-  if(!session?.user)
-  {redirect("/login")
-  }
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      // Redirect to login page if user is not authenticated
+      redirect("/login");
+    }
+    if (status === "authenticated") {
+      console.log("User is authenticated:", session);
+    }
+  }, [status,session]);
 
   return (
         <main className="nc-PageHome relative overflow-hidden">

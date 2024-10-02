@@ -21,7 +21,7 @@ const loginSocials = [
     name: "Continue with Google",
     href: "#",
     icon: googleSvg,
-    action: () => signIn("google")
+    action: () => signIn("google",{ callbackUrl: "/" })
   },
   {
     name: "Continue with Github",

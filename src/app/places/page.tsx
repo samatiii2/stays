@@ -6,6 +6,7 @@ import {redirect} from "next/navigation";
 
 const Page = () => {
     const { data: session } = useSession();
+    console.log('Places ::',session)
     if(!session?.user)
         redirect('/login')
     return (
