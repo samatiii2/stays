@@ -10,6 +10,8 @@ import Link from "next/link";
 import {toast} from "sonner";
 import {useRouter} from "next/navigation";
 import {Route} from "@/routers/types";
+import {signIn} from "next-auth/react";
+import Github from "@/images/Github.svg";
 
 
 interface User {
@@ -27,14 +29,16 @@ const loginSocials = [
     icon: facebookSvg,
   },
   {
-    name: "Continue with Twitter",
-    href: "#",
-    icon: twitterSvg,
-  },
-  {
     name: "Continue with Google",
     href: "#",
     icon: googleSvg,
+    action: () => signIn("google",{ callbackUrl: "/" })
+  },
+  {
+    name: "Continue with Github",
+    href: "#",
+    icon: Github,
+    action: () => signIn("github",{ callbackUrl: "/" })
   },
 ];
 
@@ -75,7 +79,7 @@ const PageSignUp: FC<PageSignUpProps> = ({}) => {
         <div className="max-w-md mx-auto space-y-6 ">
           <div className="grid gap-3">
             {loginSocials.map((item, index) => (
-              <a
+              <a onClick={item?.action}
                 key={index}
                 href={item.href}
                 className="nc-will-change-transform flex w-full rounded-lg bg-primary-50 dark:bg-neutral-800 px-4 py-3 transform transition-transform sm:px-6 hover:translate-y-[-2px]"

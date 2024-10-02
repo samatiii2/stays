@@ -27,7 +27,7 @@ const loginSocials = [
     name: "Continue with Github",
     href: "#",
     icon: Github,
-    action: () => signIn("github")
+    action: () => signIn("github",{ callbackUrl: "/" })
   },
 ];
 
